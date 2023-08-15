@@ -1,9 +1,7 @@
 package com.shopping.domain;
 
 import com.shopping.constant.ItemSellStatus;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item {
 
     @Id
@@ -31,5 +31,9 @@ public class Item {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itmeSellStatus; // 상품 판매 상태
+
+    private String fileName; // 상품 사진 파일명
+
+    private String filePath; // 상품 사진 경로
 
 }
