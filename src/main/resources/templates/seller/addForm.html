@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<!--    <div class="py-5 text-center">-->
+<!--        <h2 th:text="#{page.addItem}">상품 등록</h2>-->
+<!--    </div>-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <!--<div class="col-md-7 col-lg-8 container">-->
+                <form th:action="@{/item/new}" method="post" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <hr/>
+                        <div class="col-12">
+                            <label class="form-label">상품 상태</label><br/>
+                            <input type="radio" name="itemSellStatus" id="itemSellStatus" value="0">판매중<br/>
+                            <input type="radio" name="itemSellStatus" id="itemSellStatus" value="1">품절<br/>
+                            <div class="invalid-feedback">
+                                Input is empty.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="name" class="form-label">상품 이름</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="상품 이름을 입력하세요.">
+                            <div class="invalid-feedback">
+                                Your name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="text" class="form-label">상품 설명</label>
+                            <input type="text" class="form-control" name="text" id="text" placeholder="상품 설명을 입력하세요.">
+                            <div class="invalid-feedback">
+                                Input is empty.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="price" class="form-label">상품 가격</label>
+                            <input type="text" class="form-control" id="price" name="price" placeholder="상품 가격을 입력하세요.">
+                            <div class="invalid-feedback">
+                                Input is empty.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="quantity" class="form-label">상품 재고</label>
+                            <input type="text" class="form-control" id="quantity" name="quantity"
+                                   placeholder="상품 재고를 입력하세요.">
+                            <div class="invalid-feedback">
+                                Input is empty.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="text" class="form-label">상품 이미지 업로드</label>
+                            <input type="file" class="form-control" id="attachFile" name="attachFile">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg mb-3" type="submit">상품 등록</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</div> <!-- /container -->
+</body>
+</html>

@@ -4,12 +4,11 @@ import com.shopping.constant.ItemSellStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Item {
@@ -25,15 +24,23 @@ public class Item {
     @Column(nullable = false, name = "price")
     private int price; // 상품 가격
 
+    @Column(nullable = false)
+    private int quantity; // 상품 수량
+
     @Lob
     @Column(nullable = false)
     private String itemDetail; // 상품 상세 설명
 
-    @Enumerated(EnumType.STRING)
-    private ItemSellStatus itmeSellStatus; // 상품 판매 상태
+    private int itemSellStatus; // 상품 판매 상태, 0: 판매중, 1: 품절
 
-    private String fileName; // 상품 사진 파일명
+    @OneToOne
+    private UploadFile attachFile;
 
-    private String filePath; // 상품 사진 경로
+    @OneToMany
+    private List<UploadFile> imageFiles;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "seller_id")
+    private Member seller; // 판매자 아이디
 
 }

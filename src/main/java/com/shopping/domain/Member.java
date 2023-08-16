@@ -1,20 +1,22 @@
 package com.shopping.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.shopping.constant.Role;
+import com.shopping.dto.MemberFormDto;
+import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Builder
-@Getter
-@Setter
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(unique = true)
     private String username;
@@ -25,7 +27,6 @@ public class Member {
     //주소
     private String address;
     private String phoneNumber;
-
     private String role; // 권한
 
 }

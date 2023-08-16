@@ -29,9 +29,9 @@ public class AuthController {
     @PostMapping("/signup")
     public String signUp(SignupDto signupDto) {
 
-        Member newMember = signupDto.toEntity();
+        Member member = signupDto.toEntity();
 
-        Member memberEntity = authService.signup(newMember);
+        Member memberEntity = authService.signup(member);
         System.out.println(memberEntity);
 
         return "login";

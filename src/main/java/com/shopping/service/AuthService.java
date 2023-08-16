@@ -21,9 +21,17 @@ public class AuthService {
         String rawPassword = member.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         member.setPassword(encPassword);
-        member.setRole("ROLE_USER"); // 기본 member 권한
+        member.setRole(member.getRole()); // 기본 member 권한
 
-        return memberRepository.save(member);
+        Member memberEntity = memberRepository.save(member);
+
+        return memberEntity;
     }
+
+//    @Transactional
+//    public Member memberUpdate(Member member) {
+//        Member memberEntity = memberRepository.save(member);
+//        return memberEntity;
+//    }
 
 }
