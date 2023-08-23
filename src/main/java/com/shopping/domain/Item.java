@@ -4,6 +4,7 @@ import com.shopping.constant.ItemSellStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "itemId")
-    private Long itemId; // 상품 코드
+    private int id; // 상품 코드
 
     @Column(nullable = false, length = 50)
     private String itemName; // 상품명
@@ -33,14 +33,16 @@ public class Item {
 
     private int itemSellStatus; // 상품 판매 상태, 0: 판매중, 1: 품절
 
-    @OneToOne
-    private UploadFile attachFile;
-
-    @OneToMany
-    private List<UploadFile> imageFiles;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id")
     private Member seller; // 판매자 아이디
+
+    @OneToMany(mappedBy = "item")
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    private String imgName;
+
+    private String imgPath;
+
 
 }

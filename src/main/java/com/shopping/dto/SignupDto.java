@@ -11,6 +11,8 @@ public class SignupDto {
     private String email;
     private String name;
     private String address;
+
+    private String role;
     private String phoneNumber;
 
     public Member toEntity() {
@@ -21,6 +23,7 @@ public class SignupDto {
                 .name(name)
                 .address(address)
                 .phoneNumber(phoneNumber)
+                .role(role)
                 .build();
     }
 }

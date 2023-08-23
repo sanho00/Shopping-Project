@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     List<Item> findByItemName(String itemName);
 
-    Item findByItemId(Long itemId);
+    Item findItemById(int id);
 }

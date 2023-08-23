@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -15,6 +16,7 @@ public class AuthService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Transactional // Write(insert, update, delete)
     public Member signup(Member member) {
@@ -24,6 +26,12 @@ public class AuthService {
         member.setRole(member.getRole()); // 기본 member 권한
 
         Member memberEntity = memberRepository.save(member);
+
+        if (Objects.equals(memberEntity.getRole(), "ROLE_SELLER")) {
+
+        } else if (Objects.equals(member.getRole(), "ROLE_USER")) {
+
+        }
 
         return memberEntity;
     }

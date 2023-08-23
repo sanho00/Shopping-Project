@@ -1,9 +1,14 @@
 package com.shopping.repository;
 
+import com.shopping.domain.Cart;
 import com.shopping.domain.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CartItemRepository extends JpaRepository<CartItem, Long> {
+import java.util.List;
 
-    //CartItem findByCartIdAndItemId(Long cartId, Long itemId);
+public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
+    CartItem findByCartIdAndItemId(int cartId, int itemId);
+    CartItem findCartItemById(int id);
+    List<CartItem> findCartItemByItemId(int id);
+
 }
