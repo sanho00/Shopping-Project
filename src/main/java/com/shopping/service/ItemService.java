@@ -1,5 +1,6 @@
 package com.shopping.service;
 
+import com.shopping.domain.CartItem;
 import com.shopping.domain.Item;
 import com.shopping.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,21 +18,20 @@ import java.util.UUID;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final CartService cartService;
+    private final SaleService saleService;
 
     // 상품 등록
-    public void saveItem(Item item, MultipartFile imgFile) throws IOException {
+    public void saveItem(Item item, MultipartFile imgFile) throws Exception {
 
         String oriImgName = imgFile.getOriginalFilename();
-        String imgName = "";
 
         String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files/";
 
         // UUID 이용하여 파일명 새로 생성
         UUID uuid = UUID.randomUUID();
 
-        String savedFileName = uuid + "_" + oriImgName; // 파일명에서 imgName 으로
-
-        imgName = savedFileName;
+        String imgName = uuid + "_" + oriImgName;
 
         File saveFile = new File(projectPath, imgName);
         imgFile.transferTo(saveFile);
@@ -63,10 +63,11 @@ public class ItemService {
         imgFile.transferTo(saveFile);
 
         Item modify = itemRepository.findItemById(id);
-        modify.setItemName(item.getItemName());
-        modify.setItemDetail(item.getItemDetail());
+        modify.setName(item.getName());
+        modify.setText(item.getText());
         modify.setPrice(item.getPrice());
-        modify.setItemSellStatus(item.getItemSellStatus());
+        modify.setStock(item.getStock());
+        modify.setIsSoldOut(item.getIsSoldOut());
         modify.setImgName(fileName);
         modify.setImgPath("/files/" + fileName);
         itemRepository.save(modify);
@@ -74,6 +75,11 @@ public class ItemService {
 
     // 상품 삭제
     public void itemDelete(Integer id) {
+        List<CartItem> items = cartService.findCartItemByItemId(id);
+
+        for (CartItem item : items) {
+            cartService.cartItemDelete(item.getId());
+        }
         itemRepository.deleteById(id);
     }
 }

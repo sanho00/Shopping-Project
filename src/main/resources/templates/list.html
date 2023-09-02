@@ -64,7 +64,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <lt><a class="dropdown-item" th:href="@{/user/{id}(id=${member.getId()})}">마이페이지</a></lt>
                         <lt><a class="dropdown-item" th:href="@{/user/cart/{id}(id=${member.getId()})}">장바구니</a></lt>
-                        <lt><a class="dropdown-item" th:href="@{/user/orderHist/{id}(id=${member.getId()})}">주문내역</a></lt>
+                        <lt><a class="dropdown-item" th:href="@{/user/orderList/{id}(id=${member.getId()})}">주문내역</a></lt>
                     </ul>
                 </div>
             </form>
@@ -77,7 +77,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <lt><a class="dropdown-item" th:href="@{/seller/{id}(id=${member.getId()})}">판매자페이지</a></lt>
                         <lt><a class="dropdown-item" th:href="@{/seller/manage/{id}(id=${member.getId()})}">상품관리</a></lt>
-                        <lt><a class="dropdown-item" th:href="@{/seller/salelist/{id}(id=${member.getId()})}">판매내역</a></lt>
+                        <lt><a class="dropdown-item" th:href="@{/seller/saleList/{id}(id=${member.getId()})}">판매내역</a></lt>
                     </ul>
                 </div>
             </form>
@@ -108,12 +108,12 @@
             <div class="col mb-5" th:each="item : ${items}">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top"  th:src="@{${item.getImgPath()}}" alt="..." />
+                    <img class="card-img-top"  th:src="@{ ${item.getImgPath()}}" alt="..." />
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name\-->
-                            <h5 class="fw-bolder" th:text="${item.getItemName()}">아이템 이름</h5>
+                            <h5 class="fw-bolder" th:text="${item.getName()}">아이템 이름</h5>
                             <!-- Product price-->
                             <p th:text="|${item.getPrice()} 원|">아이템 가격</p>
                         </div>

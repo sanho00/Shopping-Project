@@ -24,6 +24,7 @@ public class Cart {
 
     private int count;
 
+    @Builder.Default
     @OneToMany(mappedBy = "cart")
     private List<CartItem> cartItems = new ArrayList<>();
 

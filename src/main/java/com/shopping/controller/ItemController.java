@@ -33,7 +33,7 @@ public class ItemController {
     public String home(Model model) {
         List<Item> items = itemService.allItemView();
         model.addAttribute("items", items);
-        return "/list";
+        return "list";
     }
 
     @GetMapping("/list")
@@ -74,13 +74,13 @@ public class ItemController {
     // 상품 등록
     @PostMapping("/item/new")
     public String itemAdd(Item item, MultipartFile imgFile,
-                          @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException {
+                          @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception {
         if (principalDetails.getMember().getRole().equals("ROLE_SELLER")) {
             // 판매자
             item.setSeller(principalDetails.getMember());
             itemService.saveItem(item, imgFile);
 
-            return "/seller/addForm";
+            return "redirect:/list";
         } else {
             return "redirect:/list";
         }
