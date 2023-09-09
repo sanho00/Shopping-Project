@@ -88,7 +88,7 @@ public class ItemController {
 
     // 상품 상세 페이지
     @GetMapping("/item/view/{itemId}")
-    public String itemView(Model model, @PathVariable("id") Integer id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String itemView(Model model, @PathVariable("itemId") Integer id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
         if (principalDetails.getMember().getRole().equals("ROLE_SELLER")) {
             // 판매자
@@ -97,7 +97,7 @@ public class ItemController {
             model.addAttribute("item", itemService.itemView(id));
             model.addAttribute("member", member);
 
-            return "/item/itemView";
+            return "itemView";
         } else {
             // 구매자
             Member member = principalDetails.getMember();
@@ -117,7 +117,7 @@ public class ItemController {
             model.addAttribute("item", itemService.itemView(id));
             model.addAttribute("member", member);
 
-            return "/item/itemView";
+            return "itemView";
         }
     }
 
